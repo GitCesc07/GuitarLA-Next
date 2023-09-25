@@ -11,6 +11,7 @@ export default function Producto({ guitarra, agregarCarrito }) {
   const MySwal = withReactContent(Swal)
 
   const [cantidad, setCantidad] = useState(0)
+  console.log(guitarra)
 
   const { nombre, descripcion, precio, imagen } = guitarra[0].attributes
 
@@ -38,8 +39,22 @@ export default function Producto({ guitarra, agregarCarrito }) {
       cantidad
     }
 
-    // Pasando la información
-    agregarCarrito(guitarraSeleccionada)
+    MySwal.fire({
+      title: "Agregar Carrito de Compra",
+      showDenyButton: true,
+      icon: "question",
+      text: "¿Seguro desea agregar al Carrito de Compras?",
+      confirmButtonText: "Si, Agregar",
+      confirmButtonColor: "success",
+      denyButtonText: "No, Agregar",
+      denyButtonColor: "red",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        MySwal.fire("Guardado Correctamente", "", "success")
+        // Pasando la información
+        agregarCarrito(guitarraSeleccionada)
+      }
+    })
   }
 
   return (
