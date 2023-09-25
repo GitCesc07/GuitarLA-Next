@@ -89,7 +89,7 @@ export async function getStaticPaths() {
 
   const paths = data.map(guitarra => ({
     params: {
-      url: guitarra.attributes.url
+      url: guitarra.attributes.url,
     }
   }))
 
